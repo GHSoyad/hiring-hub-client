@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 const Navbar = () => {
     const menuLinks = <>
         <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/jobs'>Jobs</NavLink></li>
         <li><NavLink to='/about'>About</NavLink></li>
         <li><NavLink to='/services'>Services</NavLink></li>
         <li><NavLink to='/careers'>Careers</NavLink></li>
@@ -11,7 +12,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div className="bg-primary/20 z-50 sticky top-0">
+        <div className="bg-primary-content/95 z-50 sticky top-0">
             <div className="navbar justify-between container mx-auto max-w-screen-xl font-semibold relative">
                 <Link to='/' className="max-w-[200px] mr-4">Hiring Hub</Link>
                 <div className='flex gap-1'>
