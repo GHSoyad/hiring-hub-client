@@ -27,9 +27,9 @@ const Jobs = () => {
 
 
     return (
-        <div className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0 my-8 flex gap-6 min-h-[1200px]'>
-            <aside className='min-h-screen bg-primary/20 rounded-lg shadow-lg'>
-                <div className='flex flex-col gap-4 w-[240px] p-6 rounded-lg sticky top-20'>
+        <div className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0 my-8 flex gap-6'>
+            <aside className='min-h-screen bg-primary/10 rounded-lg shadow-lg'>
+                <div className='flex flex-col gap-4 w-[240px] p-6 rounded-lg sticky top-16'>
                     <select className="select select-primary w-full max-w-xs" onChange={(e) => setRole(e.target.value)}>
                         <option value=''>Job Roles</option>
                         {filterLoading ? <option>Loading...</option> :

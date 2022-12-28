@@ -6,7 +6,7 @@ const JobCard = ({ job }) => {
     const { _id, role, location, type } = job;
 
     return (
-        <div className='bg-primary/20 p-4 sm:p-6 rounded-lg font-medium shadow-lg hover:shadow-xl md:hover:scale-105 hover:border-primary/40 border-2 transition-all flex-1'>
+        <div className='bg-primary/10 p-4 sm:p-6 rounded-lg font-medium shadow-lg hover:shadow-xl md:hover:scale-105 hover:border-primary/40 border-2 transition-all flex-1'>
             <h2 className='text-2xl'>{role}</h2>
             <p className='font-normal'>{location}</p>
             <p className='mt-4'>{type}</p>
