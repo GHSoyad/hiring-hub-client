@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../layouts/DashboardLayout";
 import MainLayout from "../layouts/MainLayout";
+import AddJob from "../pages/Dashboard/AddJob/AddJob";
 import AllJobs from "../pages/Dashboard/AllJobs/AllJobs";
 import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
 import Home from "../pages/Home/Home";
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/all-jobs',
                 element: <AllJobs></AllJobs>
+            },
+            {
+                path: '/dashboard/add-job',
+                element: <AddJob></AddJob>
             }
         ]
     }
