@@ -1,6 +1,8 @@
+import { ErrorResponse } from '@remix-run/router';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
+import ConfirmModal from '../../../components/ConfirmModal/ConfirmModal';
 import EditJobModal from './EditJobModal';
 
 const AllJobs = () => {
@@ -42,6 +44,21 @@ const AllJobs = () => {
             .catch(error => console.log(error))
     }
 
+    const handleDelete = (id) => {
+        fetch(`http://localhost:5000/job/${id}`, {
+            method: 'DELETE',
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    console.log('Job Deleted!');
+                    refetch();
+                    setJob(null);
+                }
+            })
+            .catch(error => console.log(error))
+    }
+
     return (
         <div className='container max-w-screen-lg mx-auto mt-10'>
             <div className="overflow-x-auto">
@@ -67,7 +84,7 @@ const AllJobs = () => {
                                         <td>
                                             <div className='flex gap-6 text-xl justify-center h-full'>
                                                 <label htmlFor="edit-job-modal"><FaRegEdit onClick={() => setJob(job)} title='Edit' className='hover:text-green-600 hover:scale-110 cursor-pointer transition'></FaRegEdit></label>
-                                                <FaRegTrashAlt title='Delete' className='hover:text-red-600 hover:scale-110 cursor-pointer transition'></FaRegTrashAlt>
+                                                <label htmlFor="confirm-modal"><FaRegTrashAlt onClick={() => setJob(job)} title='Delete' className='hover:text-red-600 hover:scale-110 cursor-pointer transition'></FaRegTrashAlt></label>
                                             </div>
                                         </td>
                                     </tr>
@@ -79,6 +96,10 @@ const AllJobs = () => {
             {
                 job &&
                 <EditJobModal job={job} handleEdit={handleEdit}></EditJobModal>
+            }
+            {
+                job &&
+                <ConfirmModal data={job} action={handleDelete}></ConfirmModal>
             }
         </div>
     );
