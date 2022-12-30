@@ -11,13 +11,13 @@ const JobDetails = () => {
 
     const { isLoading, data: jobDetails } = useQuery({
         queryKey: ['jobDetails', id],
-        queryFn: () => fetch(`http://localhost:5000/job/${id}`)
+        queryFn: () => fetch(`https://hiring-hub-server.vercel.app/job/${id}`)
             .then(res => res.json())
     })
 
     const { isLoading: jobsLoading, data: similarJobs } = useQuery({
         queryKey: ['jobs', jobDetails?.role, jobDetails?.location],
-        queryFn: () => fetch(`http://localhost:5000/jobs?role=${jobDetails?.role}`)
+        queryFn: () => fetch(`https://hiring-hub-server.vercel.app/jobs?role=${jobDetails?.role}`)
             .then(res => res.json()),
         enabled: !!jobDetails
     })

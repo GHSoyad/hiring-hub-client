@@ -1,23 +1,24 @@
-import { ErrorResponse } from '@remix-run/router';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import ConfirmModal from '../../../components/ConfirmModal/ConfirmModal';
 import EditJobModal from './EditJobModal';
 
 const AllJobs = () => {
 
+    const [updating, setUpdating] = useState(false);
     const [job, setJob] = useState({});
     const { isLoading, data: jobs, refetch } = useQuery({
         queryKey: ['jobs'],
         queryFn: () =>
-            fetch("http://localhost:5000/jobs")
+            fetch("https://hiring-hub-server.vercel.app/jobs")
                 .then(res => res.json())
     })
 
     const handleEdit = (e, id) => {
-
         e.preventDefault();
+        setUpdating(true);
         const form = e.target;
         const job = {
             role: form.role.value,
@@ -26,7 +27,7 @@ const AllJobs = () => {
             type: form.type.value
         }
 
-        fetch(`http://localhost:5000/job/${id}`, {
+        fetch(`https://hiring-hub-server.vercel.app/job/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -36,27 +37,30 @@ const AllJobs = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
-                    console.log('Job Details Updated');
+                    toast.success('Job Details Updated');
                     refetch();
                     setJob(null);
                 }
             })
-            .catch(error => console.log(error))
+            .catch(error => toast.error(error.message))
+            .finally(() => setUpdating(false))
     }
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/job/${id}`, {
+        setUpdating(true);
+        fetch(`https://hiring-hub-server.vercel.app/job/${id}`, {
             method: 'DELETE',
         })
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
-                    console.log('Job Deleted!');
+                    toast.success('Job Deleted!');
                     refetch();
                     setJob(null);
                 }
             })
-            .catch(error => console.log(error))
+            .catch(error => toast.error(error))
+            .finally(() => setUpdating(false))
     }
 
     return (
@@ -95,11 +99,11 @@ const AllJobs = () => {
             </div>
             {
                 job &&
-                <EditJobModal job={job} handleEdit={handleEdit}></EditJobModal>
+                <EditJobModal job={job} handleEdit={handleEdit} setJob={setJob} updating={updating}></EditJobModal>
             }
             {
                 job &&
-                <ConfirmModal data={job} action={handleDelete}></ConfirmModal>
+                <ConfirmModal data={job} action={handleDelete} updating={updating}></ConfirmModal>
             }
         </div>
     );

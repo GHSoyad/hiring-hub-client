@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EditJobModal = ({ job, handleEdit }) => {
+const EditJobModal = ({ job, handleEdit, setJob, updating }) => {
 
     const { _id, role, location, type, salary } = job;
     const jobTypes = ["Full-time", "Part-time", "Internship", "Apprenticeship", "Freelance"]
@@ -10,7 +10,7 @@ const EditJobModal = ({ job, handleEdit }) => {
             <input type="checkbox" id="edit-job-modal" className="modal-toggle" />
             <div className="modal">
                 <form onSubmit={(e) => handleEdit(e, _id)} className="modal-box relative flex flex-col gap-2">
-                    <label htmlFor="edit-job-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <label onClick={() => setJob(null)} htmlFor="edit-job-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="text-lg font-bold">Update {role}</h3>
                     <div>
                         <label className="label label-text font-medium">Job Role</label>
@@ -34,7 +34,7 @@ const EditJobModal = ({ job, handleEdit }) => {
                             }
                         </select>
                     </div>
-                    <button type='submit' className='btn btn-primary mt-2'>Update Job</button>
+                    <button type='submit' className='btn btn-primary mt-2' disabled={updating}>{updating ? 'Updating...' : 'Update Job'}</button>
                 </form>
             </div>
         </div>

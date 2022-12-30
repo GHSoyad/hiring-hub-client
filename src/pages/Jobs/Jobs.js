@@ -9,13 +9,13 @@ const Jobs = () => {
 
     const { isLoading, data: jobs } = useQuery({
         queryKey: ['jobs', role, location],
-        queryFn: () => fetch(`http://localhost:5000/jobs?role=${role}&location=${location}`)
+        queryFn: () => fetch(`https://hiring-hub-server.vercel.app/jobs?role=${role}&location=${location}`)
             .then(res => res.json())
     })
 
     const { isLoading: filterLoading, data: jobsFilter } = useQuery({
         queryKey: ['jobFilter'],
-        queryFn: () => fetch(`http://localhost:5000/jobs`)
+        queryFn: () => fetch(`https://hiring-hub-server.vercel.app/jobs`)
             .then(res => res.json())
     })
 
@@ -27,16 +27,16 @@ const Jobs = () => {
 
 
     return (
-        <div className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0 my-8 flex gap-6'>
-            <aside className='min-h-screen bg-primary/10 rounded-lg shadow-lg'>
-                <div className='flex flex-col gap-4 w-[240px] p-6 rounded-lg sticky top-16'>
-                    <select className="select select-primary w-full max-w-xs" onChange={(e) => setRole(e.target.value)}>
+        <div className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0 my-8 lg:flex gap-6'>
+            <aside className='lg:min-h-screen bg-primary/10 rounded-lg shadow-lg w-full lg:w-[240px] relative'>
+                <div className='flex flex-col sm:flex-row lg:flex-col gap-4 p-6 rounded-lg sticky top-16'>
+                    <select className="select select-primary" onChange={(e) => setRole(e.target.value)}>
                         <option value=''>Job Roles</option>
                         {filterLoading ? <option>Loading...</option> :
                             jobFilter('role').map(role => <option key={role} value={role}>{role}</option>)
                         }
                     </select>
-                    <select className="select select-primary w-full max-w-xs" onChange={(e) => setLocation(e.target.value)}>
+                    <select className="select select-primary" onChange={(e) => setLocation(e.target.value)}>
                         <option value=''>Job Locations</option>
                         {filterLoading ? <option>Loading...</option> :
                             jobFilter('location').map(location => <option key={location} value={location}>{location}</option>)
@@ -44,7 +44,7 @@ const Jobs = () => {
                     </select>
                 </div>
             </aside>
-            <section className='flex-1'>
+            <main className='flex-1 mt-6 lg:mt-0'>
                 {
                     isLoading ? <p className='text-xl font-medium p-6 text-primary animate-pulse'>Loading...</p> :
                         jobs.length ?
@@ -56,7 +56,7 @@ const Jobs = () => {
                             :
                             <div className='text-xl font-medium p-6'>No Jobs Found in <span className='text-primary'>{location}</span> as <span className='text-primary'>{role}</span></div>
                 }
-            </section>
+            </main>
         </div>
     );
 };

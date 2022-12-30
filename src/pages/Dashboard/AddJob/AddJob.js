@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 const AddJob = () => {
 
-    const jobTypes = ["Full-time", "Part-time", "Internship", "Apprenticeship", "Freelance"]
+    const jobTypes = ["Full-time", "Part-time", "Internship", "Apprenticeship", "Freelance"];
+    const [updating, setUpdating] = useState(false);
 
     const handleForm = (e) => {
         e.preventDefault();
+        setUpdating(true);
         const form = e.target;
 
         const job = {
@@ -16,7 +19,7 @@ const AddJob = () => {
             description: form.description.value,
         }
 
-        fetch("http://localhost:5000/job", {
+        fetch("https://hiring-hub-server.vercel.app/job", {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(job)
@@ -24,11 +27,12 @@ const AddJob = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
-                    console.log("Job Posted");
+                    toast.success("Job Posted");
                     form.reset();
                 }
             })
-            .catch(error => console.log(error.message))
+            .catch(error => toast.error(error.message))
+            .finally(() => setUpdating(false))
     }
 
     return (
@@ -64,7 +68,7 @@ const AddJob = () => {
                     <label className="label label-text font-medium">Job Description</label>
                     <textarea name='description' className="textarea textarea-primary w-full" placeholder="Bio" required></textarea>
                 </div>
-                <button type='submit' className='btn btn-primary mt-2'>Add Job</button>
+                <button type='submit' className='btn btn-primary mt-2' disabled={updating}>Add Job</button>
             </form>
         </div>
     );
