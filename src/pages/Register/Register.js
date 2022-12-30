@@ -56,29 +56,29 @@ const Register = () => {
     }
 
     return (
-        <div className='bg-base-100 container px-2 md:px-4 xl:px-0 mx-auto max-w-screen-xl'>
-            <form onSubmit={handleUserRegistration} className='backdrop-blur-sm bg-white/10 max-w-md mx-auto p-8 rounded-lg text-xl'>
+        <div className='container px-2 md:px-4 xl:px-0 mx-auto max-w-screen-xl'>
+            <form onSubmit={handleUserRegistration} className='bg-primary/20 max-w-md mx-auto p-8 rounded-lg my-10'>
                 <h1 className='text-3xl text-primary font-medium mb-6 text-center'>Register Here</h1>
                 <div className="form-control w-full mb-2">
-                    <label className="label">
+                    <label className="label font-medium">
                         <span>Your Full Name</span>
                     </label>
                     <input name='name' type="text" placeholder="Type here..." className="input input-bordered input-primary" required />
                 </div>
                 <div className="form-control w-full mb-2">
-                    <label className="label">
+                    <label className="label font-medium">
                         <span>Your Email</span>
                     </label>
                     <input name='email' type="email" placeholder="Type here..." className="input input-bordered input-primary" required />
                 </div>
                 <div className="form-control w-full mb-2">
-                    <label className="label">
+                    <label className="label font-medium">
                         <span>Your Password</span>
                     </label>
                     <input name='password' type="password" placeholder="Type here..." className="input input-bordered input-primary" required />
                 </div>
                 <button type='submit' className='btn btn-primary w-full mt-6'>Register</button>
-                <p className='text-base mt-4 text-center'>Already have an account? <Link to='/login' className='text-primary font-medium'>Login.</Link></p>
+                <p className='text-base mt-4 text-center'>Already have an account? <Link to='/login' className='text-primary font-medium hover:underline'>Login.</Link></p>
             </form>
         </div>
     );

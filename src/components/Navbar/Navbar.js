@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
+import logo from '../../assets/logo.png'
 
 const Navbar = () => {
 
@@ -14,12 +15,12 @@ const Navbar = () => {
     }
 
     const menuLinks = <>
-        <li><NavLink to='/'>Home</NavLink></li>
+        <li className='disabled'><NavLink to='/home' className='pointer-events-none'>Home</NavLink></li>
         <li><NavLink to='/jobs'>Jobs</NavLink></li>
-        <li><NavLink to='/about'>About</NavLink></li>
-        <li><NavLink to='/services'>Services</NavLink></li>
-        <li><NavLink to='/careers'>Careers</NavLink></li>
-        <li><NavLink to='/contact'>Contact</NavLink></li>
+        <li className='disabled'><NavLink to='/about' className='pointer-events-none'>About</NavLink></li>
+        <li className='disabled'><NavLink to='/services' className='pointer-events-none'>Services</NavLink></li>
+        <li><NavLink to='/'>Careers</NavLink></li>
+        <li className='disabled'><NavLink to='/contact' className='pointer-events-none'>Contact</NavLink></li>
         {
             userInfo && userInfo.uid &&
             <li onClick={handleLogout}><button>Logout</button></li>
@@ -27,9 +28,14 @@ const Navbar = () => {
     </>
 
     return (
-        <div className="bg-primary-content/95 z-50 sticky top-0">
-            <div className="navbar justify-between container mx-auto max-w-screen-xl font-semibold relative">
-                <Link to='/' className="max-w-[200px] mr-4">Hiring Hub</Link>
+        <div className="bg-primary-content/90 z-50 sticky top-0">
+            <div className="navbar justify-between container mx-auto max-w-screen-xl font-bold relative">
+                <Link to='/' className="mr-4">
+                    <div className='max-w-[50px]'>
+                        <img src={logo} alt='logo' className='w-full'></img>
+                    </div>
+                    <p className='text-2xl'>Hiring Hub</p>
+                </Link>
                 <div className='flex gap-1'>
                     <div className="dropdown dropdown-end">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">

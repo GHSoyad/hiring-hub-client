@@ -4,11 +4,12 @@ import MainLayout from "../layouts/MainLayout";
 import AddJob from "../pages/Dashboard/AddJob/AddJob";
 import AllJobs from "../pages/Dashboard/AllJobs/AllJobs";
 import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
-import Home from "../pages/Home/Home";
+import Home from "../pages/Home/Home/Home";
 import JobDetails from "../pages/JobDetails/JobDetails";
 import Jobs from "../pages/Jobs/Jobs";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
     {
@@ -44,15 +45,15 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <Dashboard></Dashboard>
+                element: <PrivateRouter><Dashboard></Dashboard></PrivateRouter>
             },
             {
                 path: '/dashboard/all-jobs',
-                element: <AllJobs></AllJobs>
+                element: <PrivateRouter><AllJobs></AllJobs></PrivateRouter>
             },
             {
                 path: '/dashboard/add-job',
-                element: <AddJob></AddJob>
+                element: <PrivateRouter><AddJob></AddJob></PrivateRouter>
             }
         ]
     }

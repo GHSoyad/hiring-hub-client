@@ -29,24 +29,24 @@ const Login = () => {
     }
 
     return (
-        <div className='bg-base-100 container px-2 md:px-4 xl:px-0 mx-auto max-w-screen-xl min-h-[calc(100vh_-_380px)]'>
-            <div className='backdrop-blur-sm bg-white/10 max-w-md mx-auto p-8 rounded-lg text-xl'>
+        <div className='container px-2 md:px-4 xl:px-0 mx-auto max-w-screen-xl min-h-[calc(100vh_-_380px)]'>
+            <div className='bg-primary/20 max-w-md mx-auto p-8 rounded-lg my-10'>
                 <form onSubmit={handleUserSignIn}>
                     <h1 className='text-3xl text-primary font-medium mb-6 text-center'>Login Here</h1>
                     <div className="form-control w-full mb-2">
-                        <label className="label">
+                        <label className="label font-medium">
                             <span>Your Email</span>
                         </label>
                         <input type="email" name='email' placeholder="Type here..." className="input input-bordered input-primary" required />
                     </div>
                     <div className="form-control w-full mb-2">
-                        <label className="label">
+                        <label className="label font-medium">
                             <span>Your Password</span>
                         </label>
                         <input type="password" name='password' placeholder="Type here..." className="input input-bordered input-primary" required />
                     </div>
                     <button type='submit' className='btn btn-primary w-full mt-6'>Login</button>
-                    <p className='text-base mt-4 text-center'>Don't have an account? <Link to='/register' className='text-primary font-medium'>Register.</Link></p>
+                    <p className='text-base mt-4 text-center'>Don't have an account? <Link to='/register' className='text-primary font-medium hover:underline'>Register.</Link></p>
                 </form>
             </div>
         </div>

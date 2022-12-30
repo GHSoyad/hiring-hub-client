@@ -53,7 +53,7 @@ const JobDetails = () => {
                             </div>
                             <div className='mt-8 text-justify'>
                                 <h2 className='text-xl font-medium mb-2'>Job Description</h2>
-                                <p>A front-end developer works closely with the creative team to develop visually appealing and intuitive websites and apps for clients based on collaboration with the design team. You'll need a good eye for design to be able to make changes post-launch without requiring designer feedback.</p>
+                                <p>{jobDetails.description ? jobDetails.description : `A ${jobDetails?.role} is a  Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, aliquam. Accusantium soluta sapiente commodi maxime excepturi debitis incidunt voluptatem eum non, corrupti vitae perferendis deleniti error voluptates neque, temporibus assumenda dolor eaque delectus. Doloribus ipsa minima, sapiente minus obcaecati labore.`}</p>
                             </div>
                             <div className='mt-8 text-justify'>
                                 <h2 className='text-xl font-medium mb-2'>Responsibility</h2>
@@ -63,6 +63,7 @@ const JobDetails = () => {
                                     }
                                 </ul>
                             </div>
+                            <button className='btn btn-primary flex mx-auto w-full sm:btn-wide mt-8 disabled:text-gray-500' disabled>Apply</button>
                         </>
                 }
             </div>
